@@ -6,6 +6,10 @@ const videoGridElement = document.getElementById('video-grid')
 var MY_PEER_ID = undefined
 var participantList = []
 
+const mediaConstraints = {
+  audio: true,
+  video: {width: {exact: 320}, height: {exact: 240}, frameRate: {exact: 10}}
+};
 
 
 
@@ -22,21 +26,7 @@ console.log("video is on")
 
 // const peerList = {}
 
-navigator.mediaDevices.getUserMedia({
-  video: true,
-    // video: {
-    //   width: {
-    //     exact: 360
-    //   }, 
-    //   height:{
-    //     exact: 640
-    //   }, 
-    //   frameRate: {
-    //     exact: 15
-    //   }
-    // },
-  audio: true
-}).then(my_stream => {
+navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
   myStream = my_stream
   addVideoStream(myVideo, my_stream)
   console.log(MY_PEER_ID)
@@ -64,28 +54,9 @@ myPeer.on('open', (user_id) => {
 myPeer.on('call', (call) => {
 
   
-  navigator.mediaDevices.getUserMedia({
-    // video: {
-    //   width: {
-    //     exact: 360
-    //   }, 
-    //   height:{
-    //     exact: 640
-    //   }, 
-    //   frameRate: {
-    //     exact: 15
-    //   }
-    // },
-    video: true,
-    // video: {
-    //   width: 360, 
-    //   height: 640, 
-    //   frameRate: 15
-    // },
-    audio: true
-  }).then(my_stream => {
+  navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
 
-    call.answer(myStream)
+    call.answer(my_stream)
   
     const peerVideoElement = document.createElement('video')
 

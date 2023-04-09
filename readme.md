@@ -31,8 +31,9 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     > Limitations:
 
     1. Video Audio compulsary
-    2. Fully connected peer to peer topology
-    3. Full quality so it starts lagging after 3-4 connetions
+    2. Removing participant takes time
+    3. Fully connected peer to peer topology
+    4. Full quality so it starts lagging after 3-4 connetions
     <br>
     <br>
     
@@ -45,3 +46,13 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     So Each client has to manage 16,58,88,000 pixels per second
     Which is very costly hence needs to be optimized.
 
+* V1
+    Changes:
+    1. Added media constraints for reducing lag
+    
+
+
+> Features to be added:
+1. change camera
+2. change microphone
+3. share screen
