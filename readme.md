@@ -32,13 +32,13 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 
     1. Video Audio compulsary
     2. Removing participant takes time
-    3. Fully connected peer to peer topology
-    4. Full quality so it starts lagging after 3-4 connetions
+    3. Full quality so it starts lagging after 3-4 connetions (fixed)
     <br>
     <br>
     
     > Reason: 
-    
+    Uses Fully connected peer to peer topology
+
     For 720p 30FPS Connection 1280 * 720 *30 pixels are used = 2,76,48,000 pixels per second
 
     For 4 users in Fully connected P2P topology  each client has 3 incomming and 3 out going connections
@@ -49,10 +49,17 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 * V1
     Changes:
     1. Added media constraints for reducing lag
-    
+
 
 
 > Features to be added:
 1. change camera
 2. change microphone
 3. share screen
+4. Mute unmute self
+5. display name with participant
+6. get meeting details 
+7. improve ui
+8. only admin can get details
+9. mute/unmute a participant for self
+
