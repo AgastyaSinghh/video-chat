@@ -51,20 +51,21 @@ myPeer.on('open', (user_id) => {
   socket.emit('join-room', ROOM_ID, MY_PEER_ID)
 })
 
-myPeer.on('call', (call) => {
+myPeer.on('call', (mediaConnection) => {
 
   
   navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
 
-    call.answer(my_stream)
+    mediaConnection.answer(my_stream)
   
     const peerVideoElement = document.createElement('video')
+    addParticipant(mediaConnection.peer)
 
     // TODO create element by id,
     // const video = document.createElement('video').setAttribute('id', 'video-'+userId)
 
 
-    call.on('stream', (peerUserVideoStream) => {
+    mediaConnection.on('stream', (peerUserVideoStream) => {
       addVideoStream(peerVideoElement, peerUserVideoStream)
     })
   })

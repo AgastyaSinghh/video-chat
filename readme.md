@@ -49,6 +49,9 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 * V1
     Changes:
     1. Added media constraints for reducing lag
+* V2
+    Changes:
+    1. Fixed participant list
 
 
 
@@ -62,4 +65,4 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 7. improve ui
 8. only admin can get details
 9. mute/unmute a participant for self
-
+10. Fix multiple navigator.mediaDevices.getUserMedia()
