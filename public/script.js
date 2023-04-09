@@ -1,3 +1,5 @@
+"use strict";
+
 const socket = io('/')
 
 const participantElement = document.getElementById('participants')
@@ -24,7 +26,7 @@ var myStream = undefined
 myVideo.muted = true
 console.log("video is on")
 
-// const peerList = {}
+const peerList = {}
 
 navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
   myStream = my_stream
@@ -40,9 +42,16 @@ navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
 
 })
 
-// socket.on('user-disconnected', userId => {
-//   if (peerList[userId]) peerList[userId].close()
-// })
+socket.on('user-disconnected', userId => {
+  if (peerList[userId]) peerList[userId].close()
+  removeParticipant(userId)
+  //remove its element
+  console.log('Participant left: ', userId)
+  var elementId = 'video-' + userId
+  var element = document.getElementById(elementId)
+  if(element != null) element.remove()
+  else console.log("video element not found for |", elementId)
+})
 
 myPeer.on('open', (user_id) => {
   MY_PEER_ID = user_id;
@@ -58,11 +67,10 @@ myPeer.on('call', (mediaConnection) => {
 
     mediaConnection.answer(my_stream)
   
+    var peer_id = mediaConnection.peer
     const peerVideoElement = document.createElement('video')
-    addParticipant(mediaConnection.peer)
-
-    // TODO create element by id,
-    // const video = document.createElement('video').setAttribute('id', 'video-'+userId)
+    peerVideoElement.id = 'video-' + peer_id;
+    addParticipant(peer_id)
 
 
     mediaConnection.on('stream', (peerUserVideoStream) => {
@@ -80,18 +88,15 @@ function connectToNewUser(peerId) {
   const call = myPeer.call(peerId, myStream)
   
   const peerVideoElement = document.createElement('video')
+  peerVideoElement.id = 'video-' + peerId;
   addParticipant(peerId)
+  peerList[peerId] = call
 
 
   call.on('stream', remoteStream => {
     addVideoStream(peerVideoElement, remoteStream)
   })
   
-  // call.on('close', () => {
-  //   peerVideoElement.remove()
-  // })
-
-  // peerList[userId] = call
 }
 
 

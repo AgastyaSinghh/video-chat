@@ -31,7 +31,7 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     > Limitations:
 
     1. Video Audio compulsary
-    2. Removing participant takes time
+    2. Removing participant takes time (fixed)
     3. Full quality so it starts lagging after 3-4 connetions (fixed)
     <br>
     <br>
@@ -52,6 +52,13 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 * V2
     Changes:
     1. Fixed participant list
+* V3
+    Changes:
+    1. Removing participant takes time (fixed)
+    2. Added id for peer video elements
+    3. Closed peer connection when someone left
+    4. Removed video element for someone who left the meeting in other participants page
+    
 
 
 
