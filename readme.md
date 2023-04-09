@@ -63,13 +63,15 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 
 
 > Features to be added:
-1. change camera
-2. change microphone
-3. share screen
-4. Mute unmute self
-5. display name with participant
-6. get meeting details 
-7. improve ui
-8. only admin can get details
-9. mute/unmute a participant for self
-10. Fix multiple navigator.mediaDevices.getUserMedia()
+1. change camera / microphone
+2. Mute / unmute self
+3. Switch video on or off
+4. share screen
+5. chat
+6. display name with participant
+7. End call btn
+8. get meeting details 
+9. improve ui 
+10. only admin can get details
+11. mute/unmute a participant for self
+12. Fix multiple navigator.mediaDevices.getUserMedia()
