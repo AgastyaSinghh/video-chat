@@ -63,16 +63,17 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     1. Code for having singleton media stream
     2. Mute / Unmute
     3. Camera on / off
-    
-
+* V4 
+    Changes
+    1. Chat added
 
 
 > Features to be added:
 1. change camera / microphone
-2. Mute / unmute self
-3. Switch video on or off
+2. Mute / unmute self (in test)
+3. Switch video on or off (in test)
 4. share screen
-5. chat
+5. chat (basic done, add sender, add time)
 6. display name with participant
 7. End call btn
 8. get meeting details 

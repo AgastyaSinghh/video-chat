@@ -4,6 +4,7 @@ const socket = io('/')
 
 const participantElement = document.getElementById('participants')
 const videoGridElement = document.getElementById('video-grid')
+const chatBoxElement = document.getElementById('div-chat-main')
 
 var MY_PEER_ID = undefined
 var participantList = []
@@ -52,6 +53,18 @@ socket.on('user-disconnected', userId => {
   if(element != null) element.remove()
   else console.log("video element not found for |", elementId)
 })
+
+socket.on('receive', msg => {
+  chatBoxElement.innerHTML += msg + "<br></br>"
+})
+
+function sendMessage(){
+  var msg = document.getElementById("input-msg").value
+  if(msg == "") return
+  document.getElementById("input-msg").value = ""
+  socket.emit('send-msg', msg)
+  chatBoxElement.innerHTML += msg + "<br></br>"
+}
 
 myPeer.on('open', (user_id) => {
   MY_PEER_ID = user_id;
