@@ -58,6 +58,11 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     2. Added id for peer video elements
     3. Closed peer connection when someone left
     4. Removed video element for someone who left the meeting in other participants page
+* Test Update 1
+    Test page contains
+    1. Code for having singleton media stream
+    2. Mute / Unmute
+    3. Camera on / off
     
 
 
