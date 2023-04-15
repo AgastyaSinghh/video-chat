@@ -67,17 +67,20 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     Changes
     1. Chat added
 
+* V5
+    Updates
+    1. Moved all frontend codebase to Angular
+    2. Mute/ Unmute added
+    3. Switch video on or off added
+    4. Fixed multiple navigator.mediaDevices.getUserMedia(
+
+
 
 > Features to be added:
-1. chat (basic done, add sender, add time)
-
-2. Mute / unmute self (in test)
-3. Switch video on or off (in test)
-4. Fix multiple navigator.mediaDevices.getUserMedia() (in test)
 
 4. share screen
 5. change camera / microphone
-6. display name with participant
+6. display name with participant in video and chat
 7. End call btn
 8. get meeting details 
 9. improve ui 

@@ -1,4 +1,5 @@
-"use strict";
+import {getMyMediaStream} from "./media-loader"
+
 
 const socket = io('/')
 
@@ -23,14 +24,14 @@ const myPeer = new Peer(undefined, {
 
 // const myVideo = document.createElement('video').setAttribute('id', 'my-video')
 const myVideo = document.createElement('video')
-var myStream = undefined
+
 myVideo.muted = true
 console.log("video is on")
 
 const peerList = {}
 
-navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
-  myStream = my_stream
+
+getMyMediaStream().then(my_stream => {
   addVideoStream(myVideo, my_stream)
   console.log(MY_PEER_ID)
 
@@ -76,7 +77,7 @@ myPeer.on('open', (user_id) => {
 myPeer.on('call', (mediaConnection) => {
 
   
-  navigator.mediaDevices.getUserMedia(mediaConstraints).then(my_stream => {
+  getMyMediaStream().then(my_stream => {
 
     mediaConnection.answer(my_stream)
   
@@ -98,16 +99,18 @@ myPeer.on('call', (mediaConnection) => {
 })
 
 function connectToNewUser(peerId) {
-  const call = myPeer.call(peerId, myStream)
-  
-  const peerVideoElement = document.createElement('video')
-  peerVideoElement.id = 'video-' + peerId;
-  addParticipant(peerId)
-  peerList[peerId] = call
 
+  getMyMediaStream().then(stream => {
+    const call = myPeer.call(peerId, stream)
+    const peerVideoElement = document.createElement('video')
+    peerVideoElement.id = 'video-' + peerId;
+    addParticipant(peerId)
+    peerList[peerId] = call
 
-  call.on('stream', remoteStream => {
-    addVideoStream(peerVideoElement, remoteStream)
+    call.on('stream', remoteStream => {
+      addVideoStream(peerVideoElement, remoteStream)
+    })
+
   })
   
 }
@@ -159,5 +162,40 @@ function updateList(){
   }
 
   participantElement.innerHTML = code
+
+}
+
+function flipCamera(){
+  console.log("Flip camera triggered")
+  // myStream.enabled = false
+  
+  
+  getMyMediaStream().then(stream => {
+      var myStreamTrack = stream.getTracks()
+      myStreamTrack.forEach(track => {
+          if(track.kind == 'video'){
+              if(track.enabled == false) track.enabled = true
+              else track.enabled = false
+          }
+      });
+  })
+  
+  // console.log(myStreamTrack)
+}
+
+function flipMic(){
+  console.log("Flip mic triggered")
+  // myStream.enabled = false
+
+  getMyMediaStream().then(stream => {
+      var myStreamTrack = stream.getTracks()
+      myStreamTrack.forEach(track => {
+          console.log(track)
+          if(track.kind == 'audio'){
+              if(track.enabled == false) track.enabled = true
+              else track.enabled = false
+          }
+      });
+  })
 
 }
