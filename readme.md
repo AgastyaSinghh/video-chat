@@ -72,17 +72,17 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     1. Moved all frontend codebase to Angular
     2. Mute/ Unmute added
     3. Switch video on or off added
-    4. Fixed multiple navigator.mediaDevices.getUserMedia(
+    4. Fixed multiple navigator.mediaDevices.getUserMedia()
 
 
 
 > Features to be added:
 
-4. share screen
-5. change camera / microphone
-6. display name with participant in video and chat
-7. End call btn
-8. get meeting details 
-9. improve ui 
-10. only admin can get details
-11. mute/unmute a participant for self
+1. change camera / microphone
+2. share screen
+3. display name with participant in video and chat
+4. End call btn
+5. get meeting details 
+6. improve ui 
+7. only admin can get details
+8. mute/unmute a participant for self
