@@ -1,0 +1,26 @@
+<button id='btn-toggle-camera' (click)="toggleCamera()" [ngClass]="{'green' : cameraEnabled == true, 'red': cameraEnabled == false}">Camera</button>
+<button id='btn-toggle-mic' (click)="toggleMic()" [ngClass]="{'green' : micEnabled == true, 'red': micEnabled == false}">Mic</button>
+
+<button (click)="displayMediaDevices()">Get Devices</button>
+
+<br>
+
+<select (change)="changeMedia($event.target, 'audioinput')">
+    <option selected disabled>Choose Mic</option>
+    <option *ngFor = "let device of micList" value = {{device.deviceId}}>{{device.label}}</option>
+</select>
+
+<br>
+
+
+<select (change)="changeMedia($event.target, 'videoinput')">
+    <option selected disabled>Choose Camera</option>
+    <option *ngFor = "let device of cameraList" value = {{device.deviceId}}>{{device.label}}</option>
+</select>
+
+<br>
+
+<select>
+    <option selected disabled>Choose Speaker</option>
+    <option *ngFor = "let device of speakerList" value = {{device.deviceId}}>{{device.label}}</option>
+</select>

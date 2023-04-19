@@ -1,10 +1,13 @@
 <hr>
 <video id='video'></video>
 <hr>
-<button id='btn-toggle-camera' (click)="toggleCamera()" [ngClass]="{'green' : cameraEnabled == true, 'red': cameraEnabled == false}">Camera</button>
-<button id='btn-toggle-mic' (click)="toggleMic()" [ngClass]="{'green' : micEnabled == true, 'red': micEnabled == false}">Mic</button>
+
+
+<app-media-controller></app-media-controller>
+<br>
 
 <button id='btn-create-meeting' (click)="createMeeting()">Create Meeting</button>
 <button id='btn-join-meeting' (click)="joinMeeting()">Join Meeting</button>
+
 
 <input type="text" id="inp-text-meeting-id">

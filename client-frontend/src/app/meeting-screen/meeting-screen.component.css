@@ -2,18 +2,15 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     grid-auto-rows: 300px;
+    border: 3px solid yellow;
 }
 
+/* video.video-element{ */
 video{
+    border: 3px solid green;
     width: 100%;
+    max-width: 350px;
+    max-height: 350px;
     height: 100%;
     object-fit: cover;
-}
-
-.green {
-    background-color: green;
-}
-
-.red {
-    background-color: red;
 }

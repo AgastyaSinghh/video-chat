@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { MeetingScreenComponent } from './meeting-screen/meeting-screen.component';
 import { RoomIdService } from '../app/services/room-id.service';
+import { MediaControllerComponent } from './media-controller/media-controller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
-    MeetingScreenComponent
+    MeetingScreenComponent,
+    MediaControllerComponent
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,10 @@
     </div>
     <input type="text" name="Message" id="input-msg">
     <button id="btn-chat-send" (click)="sendMessage()">Send</button>
-    <button id="btn-mic" (click) = "toggleMic()" [ngClass]="{'green' : micEnabled == true, 'red': micEnabled == false}">Mute</button>
-    <button id="btn-camera" (click) = "toggleCamera()" [ngClass]="{'green' : cameraEnabled == true, 'red': cameraEnabled == false}">Camera</button>
+    
+
+    
 </div>
+
+<br>
+<app-media-controller></app-media-controller>

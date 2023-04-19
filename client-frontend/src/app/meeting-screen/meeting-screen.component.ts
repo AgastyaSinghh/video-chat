@@ -12,8 +12,8 @@ import { Peer, PeerJSOption } from "peerjs";
 })
 export class MeetingScreenComponent implements OnInit{
 
-  micEnabled: boolean = true
-  cameraEnabled: boolean = true
+  // micEnabled: boolean = true
+  // cameraEnabled: boolean = true
   
   participantElement: any;
   videoGridElement: any;
@@ -91,6 +91,7 @@ export class MeetingScreenComponent implements OnInit{
     video.addEventListener('loadedmetadata', () => {
       video.play()
     })
+    video.classList.add('video-element')
     this.videoGridElement.append(video)
     console.log("Added video")
   }
@@ -131,15 +132,15 @@ export class MeetingScreenComponent implements OnInit{
     this.chatBoxElement.innerHTML += msg + "<br></br>"
   }
 
-  toggleCamera(){
-    this.cameraEnabled = !this.cameraEnabled
-    MediaControllerService.toggleCamera()
-  }
+  // toggleCamera(){
+  //   this.cameraEnabled = !this.cameraEnabled
+  //   MediaControllerService.toggleCamera()
+  // }
   
-  toggleMic(){
-    this.micEnabled = !this.micEnabled
-    MediaControllerService.toggleMic()
-  }
+  // toggleMic(){
+  //   this.micEnabled = !this.micEnabled
+  //   MediaControllerService.toggleMic()
+  // }
 
   removeParticipant(userId: string) {    
     this.peerList.delete(userId)

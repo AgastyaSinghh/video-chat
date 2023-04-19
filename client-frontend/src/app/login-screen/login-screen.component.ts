@@ -13,8 +13,9 @@ import { Router } from '@angular/router';
 })
 export class LoginScreenComponent implements OnInit {
 
-  micEnabled: boolean = true
-  cameraEnabled: boolean = true
+
+  // micEnabled: boolean = true
+  // cameraEnabled: boolean = true
   
   constructor(
     private roomIdService: RoomIdService,
@@ -41,16 +42,6 @@ export class LoginScreenComponent implements OnInit {
       })
       console.log("Added video")
     })
-  }
-
-  toggleCamera(){
-    this.cameraEnabled = !this.cameraEnabled
-    MediaControllerService.toggleCamera()
-  }
-  
-  toggleMic(){
-    this.micEnabled = !this.micEnabled
-    MediaControllerService.toggleMic()
   }
 
   createMeeting(){
