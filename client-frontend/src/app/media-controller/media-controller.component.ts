@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
 import { WebRtcService } from '../services/web-rtc.service';
+import { HtmlParser } from '@angular/compiler';
 
 @Component({
   selector: 'app-media-controller',

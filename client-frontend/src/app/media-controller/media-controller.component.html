@@ -1,26 +1,56 @@
-<button id='btn-toggle-camera' (click)="toggleCamera()" [ngClass]="{'green' : cameraEnabled == true, 'red': cameraEnabled == false}">Camera</button>
-<button id='btn-toggle-mic' (click)="toggleMic()" [ngClass]="{'green' : micEnabled == true, 'red': micEnabled == false}">Mic</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar content -->
 
-<button (click)="displayMediaDevices()">Get Devices</button>
+    <span id='btn-toggle-camera' (click)="toggleCamera()" class='material-icons white-color circle'
+        [ngClass]="{'grey-background green-border' : cameraEnabled == true, 'red-background': cameraEnabled == false}">
+        {{cameraEnabled === true ? 'videocam' : 'videocam_off'}}
+    </span>
+    
+    <span id='btn-toggle-mic' (click)="toggleMic()" class='material-icons white-color circle'
+        [ngClass]="{'grey-background green-border' : micEnabled == true, 'red-background': micEnabled == false}">
+        {{micEnabled === true ? 'mic' : 'mic_off'}}
+    </span>
 
-<br>
+    
+    <button (click)="displayMediaDevices()">Get Devices</button>
 
-<select (change)="changeMedia($event.target, 'audioinput')">
-    <option selected disabled>Choose Mic</option>
-    <option *ngFor = "let device of micList" value = {{device.deviceId}}>{{device.label}}</option>
-</select>
-
-<br>
+    <span class="material-icons white-color circle grey-background">
+        more_vert
+        </span>
 
 
-<select (change)="changeMedia($event.target, 'videoinput')">
-    <option selected disabled>Choose Camera</option>
-    <option *ngFor = "let device of cameraList" value = {{device.deviceId}}>{{device.label}}</option>
-</select>
+    <br>
 
-<br>
+    <select (change)="changeMedia($event.target, 'audioinput')">
+        <option selected disabled>Choose Mic</option>
+        <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
+    </select>
 
-<select>
-    <option selected disabled>Choose Speaker</option>
-    <option *ngFor = "let device of speakerList" value = {{device.deviceId}}>{{device.label}}</option>
-</select>
+    <br>
+
+
+    <select (change)="changeMedia($event.target, 'videoinput')">
+        <option selected disabled>Choose Camera</option>
+        <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
+    </select>
+
+    <br>
+
+    <select>
+        <option selected disabled>Choose Speaker</option>
+        <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
+    </select>
+
+
+
+    
+
+    <span class="material-icons white-color oval red-background">
+        call_end
+    </span>
+
+
+
+
+</nav>
+
