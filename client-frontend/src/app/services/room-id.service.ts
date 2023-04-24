@@ -9,7 +9,9 @@ export class RoomIdService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    console.info("Room id called")
+  }
 
   private sendCreateRoomRequest(){
     

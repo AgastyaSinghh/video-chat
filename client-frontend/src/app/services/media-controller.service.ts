@@ -1,4 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
+import { WebRtcService } from './web-rtc.service';
+// import { WebRtcService } from './web-rtc.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +10,13 @@ export class MediaControllerService {
   //   throw new Error('Method not implemented.');
   // }
    
-  static myStream:MediaStream | null = null
+  myStream:MediaStream | null = null
   deviceList: [] = [];
   
-  static micID:string = ""
-  static cameraID:string = ""
+  micID:string = ""
+  cameraID:string = ""
 
-  static mediaConstraints = {
+  mediaConstraints = {
     audio: true,
     video: {
       width: {exact: 320}, 
@@ -24,10 +26,13 @@ export class MediaControllerService {
     }
   };
   
+  // webRtcService: WebRtcService
 
-  constructor() {}
+  constructor(
+    private webRtcService: WebRtcService,
+  ) {}
 
-  static async getMyMediaStream():Promise<MediaStream>{
+  async getMyMediaStream():Promise<MediaStream>{
     if (this.myStream == null){
       // var newConstraints = this.mediaConstraints
       // if(newConstraints.video.deviceId.exact == ""){
@@ -43,7 +48,7 @@ export class MediaControllerService {
     } else return this.myStream;
   }
 
-  static toggleMic(){
+  toggleMic(){
     console.log("Flip mic triggered")
     this.getMyMediaStream().then(stream => {
         var myStreamTrack = stream.getTracks()
@@ -59,7 +64,7 @@ export class MediaControllerService {
     })
   }
   
-  static toggleCamera(){
+  toggleCamera(){
     console.log("Flip camera triggered")
     this.getMyMediaStream().then(stream => {
         var myStreamTrack = stream.getTracks()
@@ -76,7 +81,7 @@ export class MediaControllerService {
     
   }
 
-  static getDeviceList(): Promise<MediaDeviceInfo[]>{
+  getDeviceList(): Promise<MediaDeviceInfo[]>{
 
     // fetchDeviceListFromNavigator().then(deviceList)
     if (!navigator.mediaDevices?.enumerateDevices) {
@@ -86,7 +91,7 @@ export class MediaControllerService {
     } return navigator.mediaDevices.enumerateDevices();
   }
 
-  static changeTrackOld(inputType: string, newTrackId: string){
+  changeTrackOld(inputType: string, newTrackId: string){
 
     if(inputType == 'audioinput') 
       this.myStream?.getAudioTracks().forEach(track => {
@@ -106,6 +111,9 @@ export class MediaControllerService {
     navigator.mediaDevices.getUserMedia(newConstraints).then((newStream) => {
       newStream.getTracks().forEach( track => {
         this.myStream?.addTrack(track)
+        console.log("meadia contriller service-> new track track")
+        // this.webRtcService.replaceTrack(inputType, track)
+        this.webRtcService.replaceTrack(inputType, track)
       })
       console.log('Track added')
     });

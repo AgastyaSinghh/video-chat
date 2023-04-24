@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
+import { WebRtcService } from '../services/web-rtc.service';
 
 @Component({
   selector: 'app-media-controller',
@@ -15,19 +16,24 @@ export class MediaControllerComponent {
   micEnabled: boolean = true
   cameraEnabled: boolean = true
 
+  constructor(
+    private webRtcService: WebRtcService,
+    private mediaControllerService: MediaControllerService,
+  ){}
+
   toggleCamera(){
     this.cameraEnabled = !this.cameraEnabled
-    MediaControllerService.toggleCamera()
+    this.mediaControllerService.toggleCamera()
   }
   
   toggleMic(){
     this.micEnabled = !this.micEnabled
-    MediaControllerService.toggleMic()
+    this.mediaControllerService.toggleMic()
   }
 
   displayMediaDevices() {
     // this.deviceList = 
-    MediaControllerService.getDeviceList()
+    this.mediaControllerService.getDeviceList()
     .then((devices: any) => {
       this.deviceList = devices;
       this.updateCameraAndMic()
@@ -67,11 +73,14 @@ export class MediaControllerComponent {
     // console.log("Old:", oldId)
     // console.log("New", newDeviceId)
 
-    
+
     
 
-    // MediaControllerService.changeTrack(inputType, newDeviceId)
-
+    this.mediaControllerService.changeTrackOld(inputType, newDeviceId)
+    // this.webRtcService.changeTrack(inputType, newDeviceId)
+    console.log("Reconnection fired")
+    this.webRtcService.reconnect()
+    
 
   }
 

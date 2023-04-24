@@ -19,6 +19,7 @@ export class LoginScreenComponent implements OnInit {
   
   constructor(
     private roomIdService: RoomIdService,
+    private mediaControllerService: MediaControllerService,
     private http: HttpClient,
     private router:Router
   ){}
@@ -35,7 +36,7 @@ export class LoginScreenComponent implements OnInit {
 
     var videoElement:HTMLVideoElement = document.getElementById('video') as HTMLVideoElement
   
-    MediaControllerService.getMyMediaStream().then(stream => {
+    this.mediaControllerService.getMyMediaStream().then(stream => {
       videoElement.srcObject = stream
       videoElement.addEventListener('loadedmetadata', () => {
           videoElement.play()
