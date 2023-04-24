@@ -78,11 +78,26 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
 
 > Features to be added:
 
-1. change camera / microphone
-2. share screen
+1. change camera / microphone (inprocess)
+2. share screen 
 3. display name with participant in video and chat
 4. End call btn
 5. get meeting details 
 6. improve ui 
 7. only admin can get details
 8. mute/unmute a participant for self
+
+
+> Next Steps
+1. Add Prompt for username (Later Make username compulsary)
+2. Re-Design Login Screen
+    - Add heading
+    - Add username section
+    - Improve my video css
+    - Device dropdowns
+    - Refresh Device Button
+    - Create Room / Join Room CSS
+3. Meeting screen page (TBD)
+
+
+
