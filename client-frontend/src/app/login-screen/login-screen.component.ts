@@ -16,6 +16,8 @@ export class LoginScreenComponent implements OnInit {
 
   // micEnabled: boolean = true
   // cameraEnabled: boolean = true
+
+  username: string = "John Doe"
   
   constructor(
     private roomIdService: RoomIdService,
@@ -34,7 +36,7 @@ export class LoginScreenComponent implements OnInit {
   startVideo(){
     console.log("Start Video")
 
-    var videoElement:HTMLVideoElement = document.getElementById('video') as HTMLVideoElement
+    var videoElement:HTMLVideoElement = document.getElementById('my-video') as HTMLVideoElement
   
     this.mediaControllerService.getMyMediaStream().then(stream => {
       videoElement.srcObject = stream
@@ -43,6 +45,8 @@ export class LoginScreenComponent implements OnInit {
       })
       console.log("Added video")
     })
+
+    videoElement.muted = true
   }
 
   createMeeting(){

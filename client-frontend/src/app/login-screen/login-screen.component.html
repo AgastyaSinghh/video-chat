@@ -1,13 +1,33 @@
-<hr>
-<video id='video'></video>
-<hr>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- <img src="./../../assets/Logo.png" alt="Logo" width="46" height="24" class="d-inline-block align-text-top"> -->
+        <span class="navbar-brand mb-0 h1">Online Meeting</span>
+        <span class="navbar-brand mb-0 user">User : {{username}}</span>
+    </div>
+</nav>
+
+<div class="container-fluid container-video">
+    <div class="div-video">
+
+        <video id='my-video' class = 'video'></video>
+        <div class = 'div-video-controls'>
+            <button>Mic</button>
+            <button>Camera</button>
+        </div>
+
+    </div>
+
+    <div class="div-meeting-details">
+        <h3>
+            
+        </h3>
+        <input type="text" id="inp-text-meeting-id" placeholder = "Meeting ID"><br>
+        <button class = 'meeting-details-btn' id='btn-create-meeting' (click)="createMeeting()">Create Meeting</button>
+        <button class = 'meeting-details-btn' id='btn-join-meeting' (click)="joinMeeting()">Join Meeting</button>
+    </div>
+
+</div>
 
 
-<app-media-controller></app-media-controller>
-<br>
 
-<button id='btn-create-meeting' (click)="createMeeting()">Create Meeting</button>
-<button id='btn-join-meeting' (click)="joinMeeting()">Join Meeting</button>
-
-
-<input type="text" id="inp-text-meeting-id">
+<!-- <app-media-controller></app-media-controller> -->

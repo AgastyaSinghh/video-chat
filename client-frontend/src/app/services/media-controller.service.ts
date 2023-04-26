@@ -19,7 +19,7 @@ export class MediaControllerService {
   mediaConstraints = {
     audio: true,
     video: {
-      width: {exact: 320}, 
+      width: {exact: 426}, 
       height: {exact: 240}, 
       frameRate: {exact: 10},
       // deviceId: { exact: "" }
