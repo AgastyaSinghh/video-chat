@@ -10,6 +10,7 @@ import { RoomIdService } from '../app/services/room-id.service';
 import { WebRtcService } from './services/web-rtc.service';
 import { MediaControllerComponent } from './media-controller/media-controller.component';
 import { VideoGridComponent } from './video-grid/video-grid.component';
+import { LoginScreenMediaControllerComponent } from './login-screen-media-controller/login-screen-media-controller.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { VideoGridComponent } from './video-grid/video-grid.component';
     LoginScreenComponent,
     MeetingScreenComponent,
     MediaControllerComponent,
-    VideoGridComponent
+    VideoGridComponent,
+    LoginScreenMediaControllerComponent
   ],
   imports: [
     BrowserModule,

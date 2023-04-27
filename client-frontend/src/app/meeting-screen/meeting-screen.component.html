@@ -16,31 +16,35 @@
     </style>
 </head>
 <body> -->
-    
+
 <!-- lol xd -->
-<p id = "peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
-<p id = "peer-id-field">My Room: {{room_id}}</p>
-<div id="participants">
-    Participant List: {{participantList.length + 1}}
-    <br>
-    <!-- Empty participants -->
-    <ul>
-        <li *ngFor="let participant of participantList">{{participant}}</li>
-    </ul>
-    {{participantList}}
-</div>
 
-<app-video-grid>
-    
-</app-video-grid>
-
-<div id="div-chatbox">
-    <div id="div-chat-main">
-        
+<!-- <div class="div-meeting-screen bg-dark"> -->
+<div class="div-meeting-screen">
+    <p id="peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
+    <p id="peer-id-field">My Room: {{room_id}}</p>
+    <div id="participants">
+        Participant List: {{participantList.length + 1}}
+        <br>
+        <!-- Empty participants -->
+        <ul>
+            <li *ngFor="let participant of participantList">{{participant}}</li>
+        </ul>
+        {{participantList}}
     </div>
-    <input type="text" name="Message" id="input-msg">
-    <button id="btn-chat-send" (click)="sendMessage()">Send</button>
-    
+
+    <app-video-grid>
+
+    </app-video-grid>
+
+    <div id="div-chatbox">
+        <div id="div-chat-main">
+
+        </div>
+        <input type="text" name="Message" id="input-msg">
+        <button id="btn-chat-send" (click)="sendMessage()">Send</button>
+
+    </div>
+    <br>
+    <app-media-controller></app-media-controller>
 </div>
-<br>
-<app-media-controller></app-media-controller>

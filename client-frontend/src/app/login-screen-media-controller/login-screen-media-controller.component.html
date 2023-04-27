@@ -1,0 +1,44 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+<div>
+
+    <div class='div-video-controls'>
+        <div class="div-refersh">
+            <span class="material-icons circle grey-background" (click)="displayMediaDevices()">
+                refresh
+            </span>
+        </div>
+        
+        <div class="div-camera">
+            <span id='btn-toggle-camera' (click)="toggleCamera()" class='material-icons circle'
+                [ngClass]="{'obj-enabled' : cameraEnabled == true, 'obj-disabled': cameraEnabled == false}">
+                {{cameraEnabled === true ? 'videocam' : 'videocam_off'}}
+            </span>
+            <select (change)="changeMedia($event.target, 'videoinput')">
+                <option selected disabled>Choose Camera</option>
+                <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        </div>
+        <div class="div-mic">
+            <span id='btn-toggle-mic' (click)="toggleMic()" class='material-icons circle'
+                [ngClass]="{'obj-enabled' : micEnabled == true, 'obj-disabled': micEnabled == false}">
+                {{micEnabled === true ? 'mic' : 'mic_off'}}
+            </span>
+            <select (change)="changeMedia($event.target, 'audioinput')">
+                <option selected disabled>Choose Microphone</option>
+                <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        </div>
+        <div class="div-speaker">
+            <span class="material-icons obj-enabled circle">
+                volume_up
+                </span>
+
+            <select>
+                <option selected disabled>Choose Speaker</option>
+                <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+<!-- </nav> -->

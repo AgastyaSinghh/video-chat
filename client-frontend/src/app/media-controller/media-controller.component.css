@@ -6,7 +6,21 @@
     background-color: red;
 }
 
+.navbar div{
+    width: 33%;
+}
 
+.left-buttons{
+    text-align: left;
+}
+
+.right-buttons{
+    text-align: right;
+}
+
+.middle-buttons{
+    text-align: center;
+}
 .material-icons {
     color: #ffffff;
     /* font-variation-settings:
@@ -25,9 +39,10 @@
     border: solid 3px red;
 }
 
-.grey-background{
+.grey-background:hover{
     background-color: rgb(73, 73, 73);
-    border: solid 3px rgb(73, 73, 73);
+    transition: 0.3s;
+    /* border: solid 3px rgb(73, 73, 73); */
     /* color: green; */
 }
 
@@ -56,3 +71,30 @@
     'GRAD' 0,
     'opsz' 48
 } */
+
+
+
+
+/* Participant badge */
+
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+  
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #c67605;
+  }
+  #lblCartCount {
+      font-size: 12px;
+      font-family: sans-serif;
+      /* background: #ff0000; */
+      color: #fff;
+      padding: 0 5px;
+      vertical-align: top;
+      margin-left: -10px; 
+  }

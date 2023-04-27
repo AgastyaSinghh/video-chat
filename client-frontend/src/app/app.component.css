@@ -1,0 +1,16 @@
+router-outlet{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+}
+app-meeting-screen{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+}
+
+app-root{
+    background-color: green;
+    padding: 10px;
+    
+}
