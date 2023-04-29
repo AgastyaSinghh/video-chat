@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
 import { WebSocketService } from '../services/web-socket.service';
 import { RoomService } from '../services/room.service';
@@ -6,7 +6,10 @@ import { Peer, PeerJSOption } from "peerjs";
 import { WebRtcService } from '../services/web-rtc.service';
 // import { WebRtcService } from './web-rtc.service';
 import { VideoGridComponent } from '../video-grid/video-grid.component';
+import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
+import { DrawerServiceService } from '../services/drawer-service.service';
 
+type Message = {sender: string, message: string}
 
 @Component({
   selector: 'app-meeting-screen',
@@ -14,6 +17,14 @@ import { VideoGridComponent } from '../video-grid/video-grid.component';
   styleUrls: ['./meeting-screen.component.css']
 })
 export class MeetingScreenComponent implements OnInit{
+  @ViewChild('drawer') drawerElement!: MatDrawer;
+
+  showFiller = false;
+  // displayItem: Object = "GGG"
+  sidebarDrawer: {displayItem: string} = {
+    displayItem: ""
+  }
+
 
   participantElement: any;
   videoGridElement: any;
@@ -22,6 +33,8 @@ export class MeetingScreenComponent implements OnInit{
   room_id: string = "";
 
   MY_PEER_ID:string = ""
+  
+  messageList: Message[] = []
   participantList :string[]= []
   // peerList:Map<string, any> = new Map<string, any>()
 
@@ -37,7 +50,9 @@ export class MeetingScreenComponent implements OnInit{
     private webRtcService: WebRtcService,
     private videoGridComponent: VideoGridComponent,
     // private roomService: RoomService
-    private mediaControllerService: MediaControllerService
+    private mediaControllerService: MediaControllerService,
+
+    private drawerService: DrawerServiceService
   ){}
 
   ngOnInit(){
@@ -77,12 +92,23 @@ export class MeetingScreenComponent implements OnInit{
       
   }
 
+  ngAfterViewInit(){
+    this.drawerService.setDrawer(this.drawerElement)
+    this.drawerService.setSidebarDrawer(this.sidebarDrawer)
+  //   console.log('Drawere loaded')
+  }
 
 
+  // toggleDrawer(){
+  //   // this.drawerElement.toggle()
+  //   this.drawerService.toggle()
+  // }
 
   startSocketListeners(){
     this.webSocketService.listen('receive').subscribe( msg => {
-      this.chatBoxElement.innerHTML += msg + "<br></br>"
+      console.log("Msg received: ", msg)
+      if(typeof msg === 'string') 
+      this.messageList.push({sender: "", message: msg})
     })
     
 
@@ -107,9 +133,11 @@ export class MeetingScreenComponent implements OnInit{
     var msg:string = messageElement.value
     if(msg == "") 
       return
+    console.log("Message: ", messageElement.value)
     messageElement.value = ""
     this.webSocketService.emit('send-msg', msg)
-    this.chatBoxElement.innerHTML += msg + "<br></br>"
+    this.messageList.push({sender: "You", message: msg})
+    // this.chatBoxElement.innerHTML += msg + "<br></br>"
   }
 
   removeParticipant(userId: string) {    
@@ -177,7 +205,13 @@ export class MeetingScreenComponent implements OnInit{
     
   }
 
-}
+  toggleSideNav(){
+    // var drawer = document.getElementById('drawer') as MatDrawer
+    // drawer.toggle()
+    // this.drawer.toggle()
+  }
 
+  
+}
 
 

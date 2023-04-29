@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
 import { WebRtcService } from '../services/web-rtc.service';
 import { HtmlParser } from '@angular/compiler';
+import { DrawerServiceService } from '../services/drawer-service.service';
 
 @Component({
   selector: 'app-media-controller',
@@ -27,6 +28,7 @@ export class MediaControllerComponent {
   constructor(
     private webRtcService: WebRtcService,
     private mediaControllerService: MediaControllerService,
+    private drawerService: DrawerServiceService,
   ){}
 
   toggleCamera(){
@@ -45,6 +47,7 @@ export class MediaControllerComponent {
     .then((devices: any) => {
       this.deviceList = devices;
       this.updateCameraAndMic()
+      console.log(devices)
     })
     .catch((err) => {
       alert("Failed to fetch all media devices!")
@@ -53,6 +56,16 @@ export class MediaControllerComponent {
       this.updateCameraAndMic()
     });
 
+  }
+
+  toggleChat(){
+    this.drawerService.toggle('ChatBox')
+  }
+  toggleInfo(){
+    this.drawerService.toggle('MeetingInfo')
+  }
+  toggleParticipantInfo(){
+    this.drawerService.toggle('ParticipantInfo')
   }
 
   updateCameraAndMic(){

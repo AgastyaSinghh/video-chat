@@ -11,6 +11,8 @@ import { WebRtcService } from './services/web-rtc.service';
 import { MediaControllerComponent } from './media-controller/media-controller.component';
 import { VideoGridComponent } from './video-grid/video-grid.component';
 import { LoginScreenMediaControllerComponent } from './login-screen-media-controller/login-screen-media-controller.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { LoginScreenMediaControllerComponent } from './login-screen-media-contro
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule
   ],
   providers: [RoomIdService, WebRtcService],
   bootstrap: [AppComponent]

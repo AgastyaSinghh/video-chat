@@ -18,3 +18,29 @@ video{
 .div-meeting-screen{
     height: 100%;
 }
+
+.main-container {
+  /* width: 500px;
+  height: 300px; */
+  width: 100%;
+  height: 90%;
+  background-color: rgb(20, 20, 20);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
+.mat-drawer{
+  width: 22%;
+  margin: 15px;
+  border-radius: 10px;
+}

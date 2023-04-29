@@ -1,50 +1,71 @@
 <!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         const ROOM_ID = "<%= roomId %>"
-    </script>
-    <script defer src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="script.js" defer></script>
-    <title>Document</title>
-    <style>
+      </script>
+      <script defer src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+      <script src="/socket.io/socket.io.js" defer></script>
+      <script src="script.js" defer></script>
+      <title>Document</title>
+      <style>
         
     </style>
 </head>
 <body> -->
 
 <!-- lol xd -->
-
 <!-- <div class="div-meeting-screen bg-dark"> -->
+<!-- Display=  {{sidebarDrawer.displayItem}} -->
 <div class="div-meeting-screen">
-    <p id="peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
-    <p id="peer-id-field">My Room: {{room_id}}</p>
-    <div id="participants">
+
+
+  <mat-drawer-container class="main-container" autosize>
+
+
+    <div class="content">
+      <app-video-grid></app-video-grid>
+      <!-- <button type="button" mat-button (click)="toggleDrawer()">
+      Toggle sidenav
+    </button> -->
+    </div>
+
+    <mat-drawer #drawer class="sidenav" mode="side" position="end">
+      <div id="meeting-details" *ngIf = "sidebarDrawer.displayItem == 'MeetingInfo'">
+        <p id="peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
+        <p id="peer-id-field">My Room: {{room_id}}</p>
+      </div>
+      <div id="participants" *ngIf = "sidebarDrawer.displayItem == 'ParticipantInfo'">
         Participant List: {{participantList.length + 1}}
         <br>
         <!-- Empty participants -->
         <ul>
-            <li *ngFor="let participant of participantList">{{participant}}</li>
+          <li *ngFor="let participant of participantList">{{participant}}</li>
         </ul>
-        {{participantList}}
-    </div>
-
-    <app-video-grid>
-
-    </app-video-grid>
-
-    <div id="div-chatbox">
+        <!-- {{participantList}} -->
+      </div>
+      <div id="div-chatbox" *ngIf = "sidebarDrawer.displayItem == 'ChatBox'">
         <div id="div-chat-main">
-
+          <ul>
+            <li *ngFor="let messageElement of messageList">{{messageElement.sender}}: {{messageElement.message}}</li>
+          </ul>
         </div>
         <input type="text" name="Message" id="input-msg">
         <button id="btn-chat-send" (click)="sendMessage()">Send</button>
 
-    </div>
-    <br>
-    <app-media-controller></app-media-controller>
+      </div>
+      <!-- <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+          Toggle extra text
+        </button> -->
+    </mat-drawer>
+
+  </mat-drawer-container>
+
+
+  <app-media-controller></app-media-controller>
 </div>

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Navbar content -->
     <div class="left-buttons">
-        <span class="material-icons white-color circle grey-background" (click)="displayMediaDevices()">
+        <span class="material-icons white-color circle grey-background" (click)="displayMediaDevices()" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
             settings
         </span>
         <span id='btn-toggle-camera' (click)="toggleCamera()" class='material-icons white-color circle'
@@ -43,16 +44,15 @@
         </span>
     </div>
     <div class="right-buttons">
-        <span class="material-icons white-color circle grey-background" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+        <span class="material-icons white-color circle grey-background" (click)="toggleInfo()">
             info
         </span>
 
-        <span class="material-icons white-color circle grey-background">
+        <span class="material-icons white-color circle grey-background" (click) = "toggleChat()">
             chat
         </span>
 
-        <span class="material-icons white-color circle grey-background">
+        <span class="material-icons white-color circle grey-background" (click)="toggleParticipantInfo()">
             people
             <span class='badge badge-warning' id='lblCartCount'> 566</span>
         </span>
