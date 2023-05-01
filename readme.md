@@ -90,6 +90,11 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     2. Added camera and change options
     3. End Call Btn Added
 
+* V8
+    Updates
+    1. Updated settings modal dialog UI
+    2. Added line to update the device list whenever the modal dialog is triggered
+    3. Added bg-dark to meeting-screen
 
 
 > Features to be added:

@@ -1,26 +1,27 @@
-<p>device-change-modal works!</p>
+<div id="device-selection-modal">
+
+    <h1 mat-dialog-title>Settigns
+
+    </h1>
+    <div mat-dialog-content>
+
+        <!-- DropDowns for device selection -->
+        <select class="select-devie-dropdown">
+            <option selected disabled>Choose Mic</option>
+            <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
+        </select>
 
 
-<!-- DropDowns for device selection -->
-<span class="material-icons" (click)="displayMediaDevices()">
-    refresh
-</span>
-        <!-- <select (change)="changeMedia($event.target, 'audioinput')"> -->
-            <select>
-                <option selected disabled>Choose Mic</option>
-                <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
-            </select>
-        
-        
-            <!-- <select (change)="changeMedia($event.target, 'videoinput')"> -->
-            <select>
-                <option selected disabled>Choose Camera</option>
-                <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
-            </select>
-        
-        
-            <select>
-                <option selected disabled>Choose Speaker</option>
-                <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
-            </select>
-        
+        <select class="select-devie-dropdown">
+            <option selected disabled>Choose Camera</option>
+            <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
+        </select>
+
+
+        <select class="select-devie-dropdown">
+            <option selected disabled>Choose Speaker</option>
+            <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
+        </select>
+
+    </div>
+</div>

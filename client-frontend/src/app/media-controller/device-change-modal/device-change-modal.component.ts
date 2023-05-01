@@ -18,7 +18,10 @@ export class DeviceChangeModalComponent {
     private mediaControllerService: MediaControllerService,
     public dialogRef: MatDialogRef<DeviceChangeModalComponent>,
 
-  ) { }
+  ) { 
+    this.displayMediaDevices()
+    console.log("Settings modal Triggered")
+  }
 
   displayMediaDevices() {
     this.mediaControllerService.getDeviceList()
