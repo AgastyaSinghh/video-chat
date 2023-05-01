@@ -23,7 +23,7 @@
 <div class="div-meeting-screen bg-dark">
 
 
-  <mat-drawer-container class="main-container" autosize>
+  <mat-drawer-container bg-dark class="main-container bg-dark" autosize>
 
 
     <div class="content">
@@ -34,29 +34,36 @@
     </div>
 
     <mat-drawer #drawer class="sidenav" mode="side" position="end">
+      <!-- Info Div -->
       <div id="meeting-details" *ngIf="sidebarDrawer.displayItem == 'MeetingInfo'">
-        <p id="peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
-        <p id="peer-id-field">My Room: {{room_id}}</p>
+        <p id="peer-id-field">User Name: {{USER_NAME}}</p>
+        <p id="peer-id-field">Peer Id: {{MY_PEER_ID}}</p>
+        <p id="peer-id-field">Room: {{room_id}}</p>
       </div>
+
+      <!-- Paticipant list div -->
       <div id="participants" *ngIf="sidebarDrawer.displayItem == 'ParticipantInfo'">
         Participant List: {{participantList.length + 1}}
         <br>
-        <!-- Empty participants -->
         <ul>
           <li *ngFor="let participant of participantList">{{participant}}</li>
         </ul>
-        <!-- {{participantList}} -->
       </div>
+
+      <!-- Chatbox -->
       <div id="div-chatbox" *ngIf="sidebarDrawer.displayItem == 'ChatBox'">
         <div id="div-chat-main">
           <ul>
             <li *ngFor="let messageElement of messageList">{{messageElement.sender}}: {{messageElement.message}}</li>
           </ul>
         </div>
-        <input type="text" name="Message" id="input-msg">
-        <span class="material-icons" id="btn-chat-send" (click)="sendMessage()">
-          send
-        </span>
+        <div id="div-chatbox-btns">
+
+          <input type="text" name="Message" id="input-msg">
+          <span class="material-icons" id="btn-chat-send" (click)="sendMessage()">
+            send
+          </span>
+        </div>
       </div>
       <!-- <p>Auto-resizing sidenav</p>
         <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>

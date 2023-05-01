@@ -25,7 +25,7 @@ export class MeetingScreenComponent implements OnInit{
     displayItem: ""
   }
 
-
+  USER_NAME: string = ""
   participantElement: any;
   videoGridElement: any;
   chatBoxElement: any;
