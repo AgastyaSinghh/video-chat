@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
 import { WebRtcService } from '../services/web-rtc.service';
-import { HtmlParser } from '@angular/compiler';
 import { DrawerServiceService } from '../services/drawer-service.service';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DeviceChangeModalComponent } from './device-change-modal/device-change-modal.component';
+
 
 @Component({
   selector: 'app-media-controller',
@@ -11,99 +13,70 @@ import { DrawerServiceService } from '../services/drawer-service.service';
 })
 export class MediaControllerComponent {
 
-  deviceList: MediaDeviceInfo[]=[]
-  cameraList: MediaDeviceInfo[]=[]
-  speakerList: MediaDeviceInfo[]=[]
-  micList: MediaDeviceInfo[]=[]
   micEnabled: boolean = true
   cameraEnabled: boolean = true
-
-  // var myModal = document.getElementById('myModal')
-  // var myInput = document.getElementById('myInput')
-  
-  // myModal.addEventListener('shown.bs.modal', function () {
-  //   myInput.focus()
-  // })
+  isScreenShared: boolean = false
 
   constructor(
     private webRtcService: WebRtcService,
     private mediaControllerService: MediaControllerService,
     private drawerService: DrawerServiceService,
-  ){}
+    public dialog: MatDialog,
+  ) { }
 
-  toggleCamera(){
+  toggleCamera() {
     this.cameraEnabled = !this.cameraEnabled
     this.mediaControllerService.toggleCamera()
   }
-  
-  toggleMic(){
+
+  toggleMic() {
     this.micEnabled = !this.micEnabled
     this.mediaControllerService.toggleMic()
   }
 
-  displayMediaDevices() {
-    // this.deviceList = 
-    this.mediaControllerService.getDeviceList()
-    .then((devices: any) => {
-      this.deviceList = devices;
-      this.updateCameraAndMic()
-      console.log(devices)
-    })
-    .catch((err) => {
-      alert("Failed to fetch all media devices!")
-      console.error(`${err.name}: ${err.message}`);
-      this.deviceList = []
-      this.updateCameraAndMic()
-    });
-
-  }
-
-  toggleChat(){
+  toggleChat() {
     this.drawerService.toggle('ChatBox')
   }
-  toggleInfo(){
+
+  toggleInfo() {
     this.drawerService.toggle('MeetingInfo')
   }
-  toggleParticipantInfo(){
+
+  toggleParticipantInfo() {
     this.drawerService.toggle('ParticipantInfo')
   }
 
-  updateCameraAndMic(){
-    this.cameraList = []
-    this.micList = []
-    this.speakerList = []
-
-    this.deviceList.forEach(device => {
-      if(device.kind == "videoinput")
-        this.cameraList.push(device)
-      if(device.kind == "audioinput")
-        this.micList.push(device)
-      if(device.kind == "audiooutput")
-        this.speakerList.push(device)
-    });
+  startScreenShare(){
+    if(this.isScreenShared === true) return
+    this.mediaControllerService.shareScreen()
   }
 
-  changeMedia(eventTarget: any, inputType: string){
+
+  changeMedia(eventTarget: any, inputType: string) {
     console.log(eventTarget)
 
-    if(eventTarget == null) return
-    
-    // var oldId = ""
-    
+    if (eventTarget == null) return
+
     var newDeviceId = eventTarget.value
-    // console.log("Old:", oldId)
-    // console.log("New", newDeviceId)
-
-
-    
 
     this.mediaControllerService.changeTrackOld(inputType, newDeviceId)
+
     // this.webRtcService.changeTrack(inputType, newDeviceId)
     console.log("Reconnection fired")
     this.webRtcService.reconnect()
-    
+
 
   }
 
-  
+  openDialog(): void {
+
+    const dialogRef = this.dialog.open(DeviceChangeModalComponent)
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed');
+    });
+
+
+  }
 }
+

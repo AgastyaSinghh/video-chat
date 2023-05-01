@@ -74,30 +74,38 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     3. Switch video on or off added
     4. Fixed multiple navigator.mediaDevices.getUserMedia()
 
+* V6
+    1. Re-Design Login Screen
+        - Add heading
+        - Add username section
+        - Improve my video css
+        - Device dropdowns
+        - Refresh Device Button
+        - Create Room / Join Room CSS
+    2. Meeting screen page added
+
+* V7
+    Updates
+    1. Added ScreenShare
+    2. Added camera and change options
+    3. End Call Btn Added
+
 
 
 > Features to be added:
 
-1. change camera / microphone (inprocess)
-2. share screen 
-3. display name with participant in video and chat
-4. End call btn
-5. get meeting details 
-6. improve ui 
-7. only admin can get details
-8. mute/unmute a participant for self
+
+
+
+1. display name with participant in video and chat
+2. get meeting details 
+3. only admin can get details
+4. mute/unmute a participant for self
+5. Screen Share for selective users
 
 
 > Next Steps
 1. Add Prompt for username (Later Make username compulsary)
-2. Re-Design Login Screen
-    - Add heading
-    - Add username section
-    - Improve my video css
-    - Device dropdowns
-    - Refresh Device Button
-    - Create Room / Join Room CSS
-3. Meeting screen page (TBD)
 
 
 

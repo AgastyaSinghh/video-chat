@@ -86,6 +86,14 @@ export class WebRtcService{
     });
   }
 
+  addStream(stream: MediaStream){
+    stream.getTracks().forEach(track => {
+      this.peerList.forEach((value, key)=>{
+        value.addTrack(track)
+      })
+    });
+  }
+
   replaceTrack(inputType: string, newTrack: MediaStreamTrack){
     console.log("webrtc service-> replace track")
     var index: number=0;

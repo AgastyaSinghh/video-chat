@@ -1,0 +1,26 @@
+<p>device-change-modal works!</p>
+
+
+<!-- DropDowns for device selection -->
+<span class="material-icons" (click)="displayMediaDevices()">
+    refresh
+</span>
+        <!-- <select (change)="changeMedia($event.target, 'audioinput')"> -->
+            <select>
+                <option selected disabled>Choose Mic</option>
+                <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        
+        
+            <!-- <select (change)="changeMedia($event.target, 'videoinput')"> -->
+            <select>
+                <option selected disabled>Choose Camera</option>
+                <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        
+        
+            <select>
+                <option selected disabled>Choose Speaker</option>
+                <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
+            </select>
+        

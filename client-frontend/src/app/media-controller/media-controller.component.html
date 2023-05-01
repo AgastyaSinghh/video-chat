@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Navbar content -->
     <div class="left-buttons">
-        <span class="material-icons white-color circle grey-background" (click)="displayMediaDevices()" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
+        <span class="material-icons white-color circle grey-background"  (click)="openDialog()">
             settings
         </span>
         <span id='btn-toggle-camera' (click)="toggleCamera()" class='material-icons white-color circle'
@@ -14,31 +13,15 @@
             [ngClass]="{'grey-background green-border' : micEnabled == true, 'red-background': micEnabled == false}">
             {{micEnabled === true ? 'mic' : 'mic_off'}}
         </span>
+        <span class="material-icons white-color circle grey-background" (click) = "startScreenShare()">
+            screen_share
+            </span>
     </div>
 
-    <!-- DropDowns for device selection -->
-
-    <!-- <select (change)="changeMedia($event.target, 'audioinput')">
-        <option selected disabled>Choose Mic</option>
-        <option *ngFor="let device of micList" value={{device.deviceId}}>{{device.label}}</option>
-    </select>
-
-
-    <select (change)="changeMedia($event.target, 'videoinput')">
-        <option selected disabled>Choose Camera</option>
-        <option *ngFor="let device of cameraList" value={{device.deviceId}}>{{device.label}}</option>
-    </select>
-
-
-    <select>
-        <option selected disabled>Choose Speaker</option>
-        <option *ngFor="let device of speakerList" value={{device.deviceId}}>{{device.label}}</option>
-    </select> -->
-
+   
 
 
     <div class="middle-buttons">
-
         <span class="material-icons white-color oval red-background">
             call_end
         </span>

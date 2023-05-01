@@ -34,11 +34,11 @@
     </div>
 
     <mat-drawer #drawer class="sidenav" mode="side" position="end">
-      <div id="meeting-details" *ngIf = "sidebarDrawer.displayItem == 'MeetingInfo'">
+      <div id="meeting-details" *ngIf="sidebarDrawer.displayItem == 'MeetingInfo'">
         <p id="peer-id-field">My Peer Id: {{MY_PEER_ID}}</p>
         <p id="peer-id-field">My Room: {{room_id}}</p>
       </div>
-      <div id="participants" *ngIf = "sidebarDrawer.displayItem == 'ParticipantInfo'">
+      <div id="participants" *ngIf="sidebarDrawer.displayItem == 'ParticipantInfo'">
         Participant List: {{participantList.length + 1}}
         <br>
         <!-- Empty participants -->
@@ -47,15 +47,16 @@
         </ul>
         <!-- {{participantList}} -->
       </div>
-      <div id="div-chatbox" *ngIf = "sidebarDrawer.displayItem == 'ChatBox'">
+      <div id="div-chatbox" *ngIf="sidebarDrawer.displayItem == 'ChatBox'">
         <div id="div-chat-main">
           <ul>
             <li *ngFor="let messageElement of messageList">{{messageElement.sender}}: {{messageElement.message}}</li>
           </ul>
         </div>
         <input type="text" name="Message" id="input-msg">
-        <button id="btn-chat-send" (click)="sendMessage()">Send</button>
-
+        <span class="material-icons" id="btn-chat-send" (click)="sendMessage()">
+          send
+        </span>
       </div>
       <!-- <p>Auto-resizing sidenav</p>
         <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>

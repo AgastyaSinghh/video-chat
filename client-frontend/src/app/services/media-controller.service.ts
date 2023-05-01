@@ -11,6 +11,8 @@ export class MediaControllerService {
   // }
    
   myStream:MediaStream | null = null
+  isScreenShared: boolean = false
+  screenShareStream: MediaStream | null = null
   deviceList: [] = [];
   
   micID:string = ""
@@ -79,6 +81,29 @@ export class MediaControllerService {
         });
     })
     
+  }
+
+  shareScreen(){
+
+    if(this.isScreenShared === true){
+      this.isScreenShared = false
+      this.screenShareStream?.getTracks().forEach( track => {
+        track.stop()
+      })
+      this.screenShareStream = null
+      console.log("All screen share tracks stopped.")
+      return
+    }
+    //get screen share media
+    navigator.mediaDevices.getDisplayMedia().then( (mediaStrem : MediaStream) => {
+      this.webRtcService.addStream(mediaStrem)
+      this.screenShareStream = mediaStrem
+      this.isScreenShared = true
+      console.log("Screen Share Started")
+    }).catch((error)=>{
+      console.log("Error while screen share")
+      console.error(error)
+    })
   }
 
   getDeviceList(): Promise<MediaDeviceInfo[]>{
