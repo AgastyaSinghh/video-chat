@@ -76,3 +76,12 @@ video{
 #btn-chat-send:hover {
   color: #343a40;
 }
+
+.content{
+  width: 100%;
+}
+
+/* app-video-grid{
+  height: 80%;
+  width: 90%;
+} */

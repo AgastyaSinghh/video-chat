@@ -1,3 +1,16 @@
+#video-grid{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    gap: 10px;
+}
+
+.video-element{
+    margin: 10px;
+    border-radius: 20px;
+}
+
+
 video{
     border: 2px solid green;
 

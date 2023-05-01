@@ -32,6 +32,12 @@ export class  VideoGridComponent {
       console.error("Video is null")
       return
     }
+
+    video.style.margin = "10px"
+    video.style.borderRadius = "10px"
+    video.style.width = "100%"
+    // video.style.height = "100%"
+
     video.srcObject = stream
     video.addEventListener('loadedmetadata', () => {
       video.play()
