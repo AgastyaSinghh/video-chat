@@ -73,7 +73,7 @@
         <!-- Participant List: {{participantList.length + 1}} -->
         <br>
         <ul id="ul-participant">
-          <li *ngFor="let participant of participantList">{{participant}}</li>
+          <li *ngFor="let participant of participantList" matTooltip={{participant.peer_id}}>{{participant.name}}</li>
         </ul>
       </div>
 
@@ -97,7 +97,7 @@
           <ul>
             <li *ngFor="let messageElement of messageList">
               <p class="p-sender">{{messageElement.sender}}:</p>
-              <p class="p.msg">{{messageElement.message}}</p>
+              <p class="p.msg">{{messageElement.content}}</p>
             </li>
           </ul>
         </div>

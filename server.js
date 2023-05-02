@@ -47,10 +47,11 @@ app.post('/newRoom', (request, response) => {
 // })
 
 io.on('connection', socket => {
-   socket.on('join-room', (roomId, userId) => {
+   socket.on('join-room', (roomId, userId, userName) => {
        console.log(roomId, userId)
        socket.join(roomId)
-       socket.to(roomId).emit('user-connected', userId)
+       //TODO emit username -> then display username in the participant window and Chatbox
+       socket.to(roomId).emit('user-connected', {userid: userId, username: userName})
 
         socket.on('disconnect', () => {
             socket.to(roomId).emit('user-disconnected', userId)

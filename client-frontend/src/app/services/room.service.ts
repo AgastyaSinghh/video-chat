@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RoomService {
   static room_id: string = ""
+  static user_name: string = "John"
   constructor() { }
 
   static setRoomID(id: string): void{
@@ -13,5 +14,13 @@ export class RoomService {
   
   static getRoomID(): string{
     return this.room_id;
+  }
+  
+  static setUserName(username: string): void{
+    this.user_name = username;
+  }
+  
+  static getUserName(): string{
+    return this.user_name;
   }
 }

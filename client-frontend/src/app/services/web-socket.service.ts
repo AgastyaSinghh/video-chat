@@ -32,8 +32,8 @@ export class WebSocketService {
     this.socket.emit(eventName, data)
   }
   
-  emit2(eventName: String, data1: any, data2: any){
-    this.socket.emit(eventName, data1, data2)
+  emit3(eventName: String, data1: any, data2: any, data3: any){
+    this.socket.emit(eventName, data1, data2, data3)
   }
 
 }

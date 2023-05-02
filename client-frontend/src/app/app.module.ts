@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeviceChangeModalComponent } from './media-controller/device-change-modal/device-change-modal.component';
+import { Participant } from 'src/models/Participant';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 @NgModule({
@@ -28,6 +33,8 @@ import { DeviceChangeModalComponent } from './media-controller/device-change-mod
     DeviceChangeModalComponent
   ],
   imports: [
+    MatTooltipModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

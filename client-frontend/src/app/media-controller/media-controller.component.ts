@@ -4,6 +4,7 @@ import { WebRtcService } from '../services/web-rtc.service';
 import { DrawerServiceService } from '../services/drawer-service.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DeviceChangeModalComponent } from './device-change-modal/device-change-modal.component';
+import { Participant } from 'src/models/Participant';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { DeviceChangeModalComponent } from './device-change-modal/device-change-
 })
 export class MediaControllerComponent {
 
-  @Input() participantList !:string[];
+  @Input() participantList !:Participant[];
 
   micEnabled: boolean = true
   cameraEnabled: boolean = true

@@ -52,8 +52,10 @@ export class WebRtcService{
     })
   }
 
-  call(peer_id :string, stream: MediaStream){
-    let call = this.myPeer.call(peer_id, stream)
+  call(peer_id :string, stream: MediaStream, dataToSend: any){
+    //meta data is used to pass the username
+    var options = {metadata: dataToSend};
+    let call = this.myPeer.call(peer_id, stream, options)
     //not working
     this.peerList.set(peer_id, call)
     

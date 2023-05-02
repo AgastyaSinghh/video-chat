@@ -29,6 +29,14 @@ export class LoginScreenComponent implements OnInit {
   meetingInputElement:HTMLInputElement|undefined;
   
   ngOnInit(): void {
+    // var input : string | null = null
+
+    // while(typeof input == 'string') {
+    //   input = window.prompt("Enter Username")
+    //   if(typeof input == 'string'){
+    //     this.username = input
+    //   }
+    // }
     this.startVideo()
     this.meetingInputElement = document.getElementById('inp-text-meeting-id') as HTMLInputElement
   }
@@ -79,6 +87,7 @@ export class LoginScreenComponent implements OnInit {
     if(this.meetingInputElement) {
       var ROOM_ID = this.meetingInputElement.value
       RoomService.setRoomID(ROOM_ID)
+      RoomService.setUserName(this.username)
       console.log("join meeting initianted", ROOM_ID)
       this.router.navigateByUrl('/meeting')
     }else{

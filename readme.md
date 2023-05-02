@@ -104,6 +104,13 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
         - Participant list
         - Room Details
 
+* V10
+    Updates
+    1. Added tooltip for each meeting control item
+    2. Users can now see the peer-id of each participant on hovering over the user name in participant sidebar
+    3. Added sender name to chat 
+    4. Display username instead of peer-id in participant list
+
 
 > Features to be added:
 
