@@ -6,10 +6,19 @@ import { Injectable } from '@angular/core';
 export class RoomService {
   static room_id: string = ""
   static user_name: string = "John"
+  static isHost: boolean = false
   constructor() { }
 
   static setRoomID(id: string): void{
     this.room_id = id;
+  }
+
+  static makeHost(){
+    this.isHost = true
+  }
+  
+  static isThisHost(): boolean{
+    return this.isHost
   }
   
   static getRoomID(): string{

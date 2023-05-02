@@ -9,17 +9,18 @@ import { VideoGridComponent } from '../video-grid/video-grid.component';
 import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
 import { DrawerServiceService } from '../services/drawer-service.service';
 import { Participant } from 'src/models/Participant';
+import { Logs } from 'src/models/Logs';
 
-class Message  {
+class Message {
   sender: string;
   content: string;
 
-  constructor(){
+  constructor() {
     this.sender = ""
     this.content = ""
   }
 
-  setByObject(obj: any){
+  setByObject(obj: any) {
     this.sender = obj.sender
     this.content = obj.content
   }
@@ -32,12 +33,12 @@ class Message  {
   templateUrl: './meeting-screen.component.html',
   styleUrls: ['./meeting-screen.component.css']
 })
-export class MeetingScreenComponent implements OnInit{
+export class MeetingScreenComponent implements OnInit {
   @ViewChild('drawer') drawerElement!: MatDrawer;
 
   showFiller = false;
   // displayItem: Object = "GGG"
-  sidebarDrawer: {displayItem: string} = {
+  sidebarDrawer: { displayItem: string } = {
     displayItem: ""
   }
 
@@ -48,10 +49,11 @@ export class MeetingScreenComponent implements OnInit{
 
   room_id: string = "";
 
-  MY_PEER_ID:string = ""
-  
+  MY_PEER_ID: string = ""
+
   messageList: Message[] = []
-  participantList :Participant[]= []
+  participantList: Participant[] = []
+  meetingLogList: Logs[] = []
   // peerList:Map<string, any> = new Map<string, any>()
 
   // peerServerAddress:PeerJSOption = {
@@ -69,7 +71,7 @@ export class MeetingScreenComponent implements OnInit{
     private mediaControllerService: MediaControllerService,
 
     private drawerService: DrawerServiceService
-  ){
+  ) {
     //adding self to the participant left
     this.USER_NAME = RoomService.getUserName()
     let me = new Participant()
@@ -78,50 +80,62 @@ export class MeetingScreenComponent implements OnInit{
     this.participantList.push(me)
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
-    
+
     this.webRtcService.createPeer()
     this.room_id = RoomService.getRoomID()
 
     this.participantElement = document.getElementById('participants')
     this.videoGridElement = document.getElementById('video-grid')
     this.chatBoxElement = document.getElementById('div-chat-main')
-    
-    
+
+    this.startEventListneners()
     this.startSocketListeners();
     this.startCallListeners();
 
 
     // var myVideo = document.createElement('video').setAttribute('id', 'my-video')
-    var myVideo:HTMLVideoElement = document.createElement('video')
-  
+    var myVideo: HTMLVideoElement = document.createElement('video')
+
     myVideo.muted = true
     console.log("video is on")
-  
+
 
     this.mediaControllerService.getMyMediaStream().then(my_stream => {
       this.videoGridComponent.addVideoStream(myVideo, my_stream)
       console.log("Peer ID", this.MY_PEER_ID)
-      
+
       this.webSocketService.listen('user-connected').subscribe((userDetails: any) => {
-      // this.webSocketService.listen('user-connected').subscribe((newUserId: any, newUserName: any) => {
-          if(typeof userDetails.userid == 'string' && typeof userDetails.username == 'string') 
-            this.connectToNewUser(userDetails.userid, userDetails.username)
-            // this.connectToNewUser(newUserId, newUserName)
-          else 
-            alert("faliure with listen.('user-connected') newUserId is not string")
+        // this.webSocketService.listen('user-connected').subscribe((newUserId: any, newUserName: any) => {
+        if (typeof userDetails.userid == 'string' && typeof userDetails.username == 'string')
+          this.connectToNewUser(userDetails.userid, userDetails.username)
+        // this.connectToNewUser(newUserId, newUserName)
+        else
+          alert("faliure with listen.('user-connected') newUserId is not string")
       })
 
     })
-      
-      
+
+
   }
 
-  ngAfterViewInit(){
+  startEventListneners() {
+    document.addEventListener("visibilitychange", (event) => {
+      if (document.visibilityState == "visible") {
+        this.webSocketService.emit('visibility-change-active', this.USER_NAME)
+        console.log("tab is active")
+      } else {
+        this.webSocketService.emit('visibility-change-inactive', this.USER_NAME)
+        console.log("tab is inactive")
+      }
+    });
+  }
+
+  ngAfterViewInit() {
     this.drawerService.setDrawer(this.drawerElement)
     this.drawerService.setSidebarDrawer(this.sidebarDrawer)
-  //   console.log('Drawere loaded')
+    //   console.log('Drawere loaded')
   }
 
 
@@ -130,20 +144,41 @@ export class MeetingScreenComponent implements OnInit{
   //   this.drawerService.toggle()
   // }
 
-  startSocketListeners(){
-    this.webSocketService.listen('receive').subscribe( (msg ) => {
+  startSocketListeners() {
+    this.webSocketService.listen('receive').subscribe((msg) => {
       console.log("Msg received: ", msg)
-      if(typeof msg === 'object') {
+      if (typeof msg === 'object') {
         let newMessage = new Message()
         newMessage.setByObject(msg)
         this.messageList.push(newMessage)
       }
     })
     
+    
+    this.webSocketService.listen('vis-active').subscribe((username) => {
+      // console.log('------------------------')
+      // console.log('Tab change by', username)
+      if(typeof username == 'string') this.addLog(username, "Back on meeting tab.")
+      else {
+        console.log("Username is not string")
+        console.log(username)
+      }
+    })
+    
+    this.webSocketService.listen('vis-inactive').subscribe((username) => {
+      // console.log('------------------------')
+      // console.log('Tab change by', username)
+      if(typeof username == 'string') this.addLog(username, "Left meeting tab.")
+      else {
+        console.log("Username is not string")
+        console.log(username)
+      }
+    })
 
-    this.webSocketService.listen('user-disconnected').subscribe( (userId) =>{
-      
-      if(typeof userId == 'string') {
+
+    this.webSocketService.listen('user-disconnected').subscribe((userId) => {
+
+      if (typeof userId == 'string') {
         this.webRtcService.closePeerConnection(userId)
         this.removeParticipant(userId)
       }
@@ -151,13 +186,14 @@ export class MeetingScreenComponent implements OnInit{
       console.log('Participant left: ', userId)
       var elementId = 'video-' + userId
       var element = document.getElementById(elementId)
-      if(element != null) element.remove()
+      if (element != null) element.remove()
       else console.log("video element not found for |", elementId)
     })
 
+    
   }
 
-  sendMessage(){
+  sendMessage() {
     var messageElement = document.getElementById("input-msg") as HTMLInputElement
     let msg = new Message()
     // var msg!:{sender: string, content: string}
@@ -165,24 +201,29 @@ export class MeetingScreenComponent implements OnInit{
     msg.content = messageElement.value
     msg.sender = RoomService.getUserName()
 
-    if(msg.content == "") 
+    if (msg.content == "")
       return
     console.log("Message: ", messageElement.value)
     messageElement.value = ""
     this.webSocketService.emit('send-msg', msg)
-    
+
     msg.sender = "You"
     this.messageList.push(msg)
     // this.chatBoxElement.innerHTML += msg + "<br></br>"
   }
 
-  removeParticipant(userId: string) {    
-    for( var i = 0; i < this.participantList.length; i++){ 
-        // TODO check == or ===
-        if ( this.participantList[i].peer_id == userId) { 
-            this.participantList.splice(i, 1); 
-            break;
-        }
+  addLog(user: string, content: string) {
+    this.meetingLogList.push(new Logs(user, content))
+  }
+
+  removeParticipant(userId: string) {
+    for (var i = 0; i < this.participantList.length; i++) {
+      // TODO check == or ===
+      if (this.participantList[i].peer_id == userId) {
+        this.addLog(this.participantList[i].name, "Left the meeting")
+        this.participantList.splice(i, 1);
+        break;
+      }
     }
     // updateList()
   }
@@ -198,19 +239,19 @@ export class MeetingScreenComponent implements OnInit{
     // updateList()
   }
 
-  startCallListeners(){
-    
+  startCallListeners() {
+
     this.webRtcService.listen('open').subscribe((user_id: any) => {
       this.MY_PEER_ID = user_id;
       console.log("My ID is: ", this.MY_PEER_ID)
       var ele = document.getElementById("peer-id-field")
-      if(ele) ele.innerText += this.MY_PEER_ID
+      if (ele) ele.innerText += this.MY_PEER_ID
       this.webSocketService.emit3('join-room', this.room_id, this.MY_PEER_ID, this.USER_NAME)
       // socket.emit('join-room', ROOM_ID, MY_PEER_ID)
     })
-    
+
     this.webRtcService.listen('call').subscribe((mediaConnection: any) => {
-    
+
       this.mediaControllerService.getMyMediaStream().then(my_stream => {
         mediaConnection.answer(my_stream)
         var peer_id = mediaConnection.peer
@@ -220,51 +261,51 @@ export class MeetingScreenComponent implements OnInit{
         // console.log(mediaConnection.metadata)
         const peerVideoElement = document.createElement('video')
         peerVideoElement.id = 'video-' + peer_id;
-        this.addParticipant(peer_username ,peer_id)
+        this.addParticipant(peer_username, peer_id)
         mediaConnection.on('stream', (peerUserVideoStream: any) => {
           //adds in naya wala
           this.videoGridComponent.addVideoStream(peerVideoElement, peerUserVideoStream)
         })
       })
     })
-    
 
-  
+
+
   }
 
-  closeSidebar(){
+  closeSidebar() {
     this.drawerService.close()
   }
 
-  copyRoomDetails(){
+  copyRoomDetails() {
     navigator.clipboard.writeText(this.room_id)
   }
 
   connectToNewUser(peerId: string, peerUserName: string) {
     this.mediaControllerService.getMyMediaStream().then(stream => {
       // const call = this.myPeer.call(peerId, stream)
-      var metadata = {username: this.USER_NAME}
+      var metadata = { username: this.USER_NAME }
       this.webRtcService.call(peerId, stream, metadata)
-      
+      this.addLog(peerUserName, "Joined the meeting")
       this.addParticipant(peerUserName, peerId)
       // this.peerList.set(peerId, call) = call
       // this.peerList.set(peerId, call)
-  
+
       // call.on('stream', (remoteStream:any) => {
       //   this.addVideoStream(peerVideoElement, remoteStream)
       // })
-  
+
     })
-    
+
   }
 
-  toggleSideNav(){
+  toggleSideNav() {
     // var drawer = document.getElementById('drawer') as MatDrawer
     // drawer.toggle()
     // this.drawer.toggle()
   }
 
-  
+
 }
 
 

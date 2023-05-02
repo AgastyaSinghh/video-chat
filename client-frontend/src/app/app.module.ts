@@ -18,6 +18,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeviceChangeModalComponent } from './media-controller/device-change-modal/device-change-modal.component';
 import { Participant } from 'src/models/Participant';
+import { Logs } from 'src/models/Logs'
 import {MatTooltipModule} from '@angular/material/tooltip';
 
 

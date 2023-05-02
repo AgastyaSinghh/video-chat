@@ -31,6 +31,10 @@
             info
         </span>
 
+        <span class="material-icons white-color circle grey-background" (click)="toggleLogs()" matTooltip="Meeting Logs" *ngIf="isHost">
+            subject
+        </span>
+
         <span class="material-icons white-color circle grey-background" (click) = "toggleChat()" matTooltip="Chat with everyone">
             chat
         </span>

@@ -5,6 +5,8 @@ import { DrawerServiceService } from '../services/drawer-service.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DeviceChangeModalComponent } from './device-change-modal/device-change-modal.component';
 import { Participant } from 'src/models/Participant';
+import { RoomIdService } from '../services/room-id.service';
+import { RoomService } from '../services/room.service';
 
 
 @Component({
@@ -19,13 +21,16 @@ export class MediaControllerComponent {
   micEnabled: boolean = true
   cameraEnabled: boolean = true
   isScreenShared: boolean = false
+  isHost: boolean = false
 
   constructor(
     private webRtcService: WebRtcService,
     private mediaControllerService: MediaControllerService,
     private drawerService: DrawerServiceService,
     public dialog: MatDialog,
-  ) { }
+  ) { 
+    this.isHost = RoomService.isThisHost()
+   }
 
   toggleCamera() {
     this.cameraEnabled = !this.cameraEnabled
@@ -43,6 +48,10 @@ export class MediaControllerComponent {
 
   toggleInfo() {
     this.drawerService.toggle('MeetingInfo')
+  }
+
+  toggleLogs(){
+    this.drawerService.toggle('MeetingLogs')
   }
 
   toggleParticipantInfo() {

@@ -111,6 +111,14 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     3. Added sender name to chat 
     4. Display username instead of peer-id in participant list
 
+* V11
+    Updates
+    1. Added Logs
+        - Joining meeting
+        - Leaving 
+        - Changing tabs
+    2. Logs only visible to host
+
 
 > Features to be added:
 

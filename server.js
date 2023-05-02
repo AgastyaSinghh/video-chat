@@ -60,6 +60,14 @@ io.on('connection', socket => {
         socket.on('send-msg', msg => {
             socket.to(roomId).emit('receive', msg)
         })
+        
+        socket.on('visibility-change-active', username => {
+            socket.to(roomId).emit('vis-active', username)
+        })
+        
+        socket.on('visibility-change-inactive', username => {
+            socket.to(roomId).emit('vis-inactive', username)
+        })
     })
     console.log("New User Connected: ", socket.id)
     

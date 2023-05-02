@@ -18,16 +18,16 @@ export class LoginScreenComponent implements OnInit {
   // cameraEnabled: boolean = true
 
   username: string = "John Doe"
-  
+
   constructor(
     private roomIdService: RoomIdService,
     private mediaControllerService: MediaControllerService,
     private http: HttpClient,
-    private router:Router
-  ){}
+    private router: Router
+  ) { }
 
-  meetingInputElement:HTMLInputElement|undefined;
-  
+  meetingInputElement: HTMLInputElement | undefined;
+
   ngOnInit(): void {
     // var input : string | null = null
 
@@ -41,15 +41,15 @@ export class LoginScreenComponent implements OnInit {
     this.meetingInputElement = document.getElementById('inp-text-meeting-id') as HTMLInputElement
   }
 
-  startVideo(){
+  startVideo() {
     console.log("Start Video")
 
-    var videoElement:HTMLVideoElement = document.getElementById('my-video') as HTMLVideoElement
-  
+    var videoElement: HTMLVideoElement = document.getElementById('my-video') as HTMLVideoElement
+
     this.mediaControllerService.getMyMediaStream().then(stream => {
       videoElement.srcObject = stream
       videoElement.addEventListener('loadedmetadata', () => {
-          videoElement.play()
+        videoElement.play()
       })
       console.log("Added video")
     })
@@ -57,52 +57,52 @@ export class LoginScreenComponent implements OnInit {
     videoElement.muted = true
   }
 
-  createMeeting(){
+  createMeeting() {
     //ping server to create a meeting for us
     var ROOM_ID = undefined
-
+    RoomService.makeHost()
 
     console.log("New Room Creation Initiated")
     var url = "http://localhost:3000/newRoom"
-    this.http.post(url, undefined).subscribe( response => {
-      var id:string = getId(response)
+    this.http.post(url, undefined).subscribe(response => {
+      var id: string = getId(response)
       ROOM_ID = id;
       RoomService.setRoomID(id)
       console.log("Room Created Successfully: ", ROOM_ID)
-      if(this.meetingInputElement) this.meetingInputElement.value = ROOM_ID
+      if (this.meetingInputElement) this.meetingInputElement.value = ROOM_ID
       // navigator.clipboard.writeText(url)
       navigator.clipboard.writeText(ROOM_ID)
       // alert(ROOM_ID)
-        //     // //get address 
-    //     // var url = window.location.href
-    //     // url += ROOM_ID
-    //     // joinMeeting(ROOM_ID)
+      //     // //get address 
+      //     // var url = window.location.href
+      //     // url += ROOM_ID
+      //     // joinMeeting(ROOM_ID)
     })
-    
 
-  
+
+
   }
-  
-  joinMeeting(){
-    if(this.meetingInputElement) {
+
+  joinMeeting() {
+    if (this.meetingInputElement) {
       var ROOM_ID = this.meetingInputElement.value
       RoomService.setRoomID(ROOM_ID)
       RoomService.setUserName(this.username)
       console.log("join meeting initianted", ROOM_ID)
       this.router.navigateByUrl('/meeting')
-    }else{
+    } else {
       alert("meeting input element not found")
     }
     // joinMeeting(ROOM_ID)
   }
-  
+
 }
 
 
-function getId(response: Object):string {
+function getId(response: Object): string {
 
   var id: string = ""
-  type Id = {id: string}
+  type Id = { id: string }
   var jsonString = JSON.stringify(response)
   console.log(typeof jsonString, jsonString)
   console.log(typeof jsonString, jsonString)

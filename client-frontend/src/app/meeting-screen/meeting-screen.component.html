@@ -57,6 +57,31 @@
         </button>
       </div>
 
+      <!-- Logs Div -->
+      <div id="meeting-logs" *ngIf="sidebarDrawer.displayItem == 'MeetingLogs'">
+        <div class="heading">
+          <nav class="navbar navbar-expand-lg navbar-light" style="width: 96%;">
+            <a class="navbar-brand" style="width: 49%;">Meeting Logs</a>
+            <div style="width: 49%; text-align: right;">
+              <span class="material-icons close-btn" (click)="closeSidebar()">
+                close
+              </span>
+            </div>
+          </nav>
+        </div>
+        <div class="alert alert-info" role="alert">
+          This section contains meeting logs but are deleted once the call ends.
+        </div>
+        <div id="div-chat-main">
+          <ul>
+            <li *ngFor="let logElement of meetingLogList">
+              <p class="p-sender">{{logElement.user}}, {{logElement.time}}:</p>
+              <p class="p.msg">{{logElement.content}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <!-- Paticipant list div -->
       <div id="participants" *ngIf="sidebarDrawer.displayItem == 'ParticipantInfo'">
         <div class="heading participant">
