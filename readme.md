@@ -96,6 +96,14 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
     2. Added line to update the device list whenever the modal dialog is triggered
     3. Added bg-dark to meeting-screen
 
+* V9
+    Updates
+    1. Fixed static partitipant count in participant-icon
+    2. Enhanced ui for
+        - Chat
+        - Participant list
+        - Room Details
+
 
 > Features to be added:
 

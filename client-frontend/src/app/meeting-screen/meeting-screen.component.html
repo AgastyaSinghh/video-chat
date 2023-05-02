@@ -36,30 +36,74 @@
     <mat-drawer #drawer class="sidenav" mode="side" position="end">
       <!-- Info Div -->
       <div id="meeting-details" *ngIf="sidebarDrawer.displayItem == 'MeetingInfo'">
-        <p id="peer-id-field">User Name: {{USER_NAME}}</p>
+        <div class="heading">
+          <nav class="navbar navbar-expand-lg navbar-light" style="width: 96%;">
+            <a class="navbar-brand" style="width: 49%;">Meeting Details</a>
+            <div style="width: 49%; text-align: right;">
+
+              <span class="material-icons close-btn" (click)="closeSidebar()">
+                close
+              </span>
+            </div>
+          </nav>
+        </div>
+        <p id="user-field">User Name: {{USER_NAME}}</p>
         <p id="peer-id-field">Peer Id: {{MY_PEER_ID}}</p>
-        <p id="peer-id-field">Room: {{room_id}}</p>
+        <p id="room-id-field">Room: {{room_id}}</p>
+        <button id="copy_link" (click)="copyRoomDetails()"><span class="material-icons" style="margin-right: 15px;">
+            content_copy
+          </span>
+          <p>Copy joining info</p>
+        </button>
       </div>
 
       <!-- Paticipant list div -->
       <div id="participants" *ngIf="sidebarDrawer.displayItem == 'ParticipantInfo'">
-        Participant List: {{participantList.length + 1}}
+        <div class="heading participant">
+          <nav class="navbar navbar-expand-lg navbar-light" style="width: 96%;">
+            <a class="navbar-brand" style="width: 49%;">Participants</a>
+            <div style="width: 49%; text-align: right;">
+
+              <span class="material-icons close-btn" (click)="closeSidebar()">
+                close
+              </span>
+            </div>
+          </nav>
+        </div>
+        <!-- Participant List: {{participantList.length + 1}} -->
         <br>
-        <ul>
+        <ul id="ul-participant">
           <li *ngFor="let participant of participantList">{{participant}}</li>
         </ul>
       </div>
 
       <!-- Chatbox -->
       <div id="div-chatbox" *ngIf="sidebarDrawer.displayItem == 'ChatBox'">
+        <div class="heading">
+          <nav class="navbar navbar-expand-lg navbar-light" style="width: 96%;">
+            <a class="navbar-brand" style="width: 49%;">In-call Messages</a>
+            <div style="width: 49%; text-align: right;">
+
+              <span class="material-icons close-btn" (click)="closeSidebar()">
+                close
+              </span>
+            </div>
+          </nav>
+        </div>
+        <div class="alert alert-info" role="alert">
+          Messages can only be seen by people in the call and are deleted when the call ends
+        </div>
         <div id="div-chat-main">
           <ul>
-            <li *ngFor="let messageElement of messageList">{{messageElement.sender}}: {{messageElement.message}}</li>
+            <li *ngFor="let messageElement of messageList">
+              <p class="p-sender">{{messageElement.sender}}:</p>
+              <p class="p.msg">{{messageElement.message}}</p>
+            </li>
           </ul>
         </div>
         <div id="div-chatbox-btns">
 
-          <input type="text" name="Message" id="input-msg">
+          <input type="text" name="Message" id="input-msg" placeholder="Enter Message">
           <span class="material-icons" id="btn-chat-send" (click)="sendMessage()">
             send
           </span>
@@ -75,5 +119,5 @@
   </mat-drawer-container>
 
 
-  <app-media-controller></app-media-controller>
+  <app-media-controller [participantList]="participantList"></app-media-controller>
 </div>

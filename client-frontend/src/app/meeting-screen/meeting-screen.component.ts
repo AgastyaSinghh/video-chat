@@ -35,7 +35,7 @@ export class MeetingScreenComponent implements OnInit{
   MY_PEER_ID:string = ""
   
   messageList: Message[] = []
-  participantList :string[]= []
+  participantList :string[]= ["You"]
   // peerList:Map<string, any> = new Map<string, any>()
 
   // peerServerAddress:PeerJSOption = {
@@ -186,6 +186,14 @@ export class MeetingScreenComponent implements OnInit{
     
 
   
+  }
+
+  closeSidebar(){
+    this.drawerService.close()
+  }
+
+  copyRoomDetails(){
+    navigator.clipboard.writeText(this.room_id)
   }
 
   connectToNewUser(peerId: string) {

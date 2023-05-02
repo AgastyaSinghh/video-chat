@@ -56,10 +56,10 @@ video{
 }
 
 #input-msg{
-  padding: 4px 12px;
+  padding: 8px 20px;
   margin-right: 8%;
   /* background-color: rgb(230, 230, 230); */
-  background-color: #dceeff;
+  background-color: #dff0ff;
   border: 0px;
   border-radius: 20px;
   width: 70%;
@@ -81,6 +81,51 @@ video{
   width: 100%;
 }
 
+#div-chat-main ul{
+  list-style: none;
+}
+
+.p-sender{
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.p-msg{
+  font-weight: 300;
+}
+
+#div-chat-main li{
+  margin-bottom: 10px;
+}
+.close-btn:hover{
+  padding: 5px;
+  background-color: rgb(202, 202, 202);
+  border-radius: 50%;
+}
+
+.heading{
+  margin-bottom: 50px;
+}
+
+#copy_link{
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  background-color: white;
+  border: 0px;
+  color: #1489ff;
+}
+
+#ul-participant{
+  list-style-type: circle;
+}
+
+#copy_link:hover{
+  background-color: #acd5fd;
+  border-radius: 30px;
+  transition: 0.2s;
+}
 /* app-video-grid{
   height: 80%;
   width: 90%;

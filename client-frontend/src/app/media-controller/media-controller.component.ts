@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MediaControllerService } from '../services/media-controller.service';
 import { WebRtcService } from '../services/web-rtc.service';
 import { DrawerServiceService } from '../services/drawer-service.service';
@@ -12,6 +12,8 @@ import { DeviceChangeModalComponent } from './device-change-modal/device-change-
   styleUrls: ['./media-controller.component.css']
 })
 export class MediaControllerComponent {
+
+  @Input() participantList !:string[];
 
   micEnabled: boolean = true
   cameraEnabled: boolean = true
