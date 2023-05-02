@@ -119,6 +119,9 @@ Enter ```http://localhost:3000/51e2f1b6-dfd5-4c78-a669-4ed1ad0e7b37``` something
         - Changing tabs
     2. Logs only visible to host
 
+* V12
+    Updated code such that meetings can't be created without any room ID
+
 
 > Features to be added:
 

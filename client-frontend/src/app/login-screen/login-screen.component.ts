@@ -86,6 +86,10 @@ export class LoginScreenComponent implements OnInit {
   joinMeeting() {
     if (this.meetingInputElement) {
       var ROOM_ID = this.meetingInputElement.value
+      if(ROOM_ID==""){
+        alert("Please enter a valid Room ID")
+        return
+      }
       RoomService.setRoomID(ROOM_ID)
       RoomService.setUserName(this.username)
       console.log("join meeting initianted", ROOM_ID)
